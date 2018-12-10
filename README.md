@@ -18,7 +18,7 @@ twisted还实现了reactor设计模式以及基于回调函数风格的非阻塞
 
 ```
 
-## 从以下几个例子中可以看出: 其实就和直接使用server socket + client socket写网络程序类似.
+### 其实和直接使用server socket + client socket的方式来写网络程序类似
 
 #### EchoServer example
 ```python
