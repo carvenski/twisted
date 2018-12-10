@@ -7,8 +7,11 @@
 Twisted is an event-driven networking engine written in Python2.
 twisted框架基于tcp/ip协议的socket通信,简单点说其实twisted就是把socket的api又封装成更简洁易用的api了.
 然后你可以不直接使用底层socket来实现网络通信程序,而使用twisted框架提供的api来写各种基于tcp/ip协议和socket编程的网络程序.
-典型的如 实现http协议的http client/server,基于rpc协议的rpc client/server等.
-所以,twisted被称为网络程序的engine!
+典型的如 实现http协议的http client/server,基于rpc协议的rpc client/server,以及mail client/server,ssh client/server等等的网络通信程序.
+
+**************************************
+ 所以,twisted被称为网络通信程序的引擎!!
+**************************************
 
 twisted还实现了reactor设计模式以及基于回调函数风格的非阻塞异步IO,所以网络性能很好.(也是epoll那一套?)
 
