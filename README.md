@@ -10,7 +10,7 @@ twisted框架基于tcp/ip协议的socket通信,简单点说其实twisted就是�
 典型的如 实现http协议的http client/server,基于rpc协议的rpc client/server等.
 所以,twisted被称为网络程序的engine!
 
-twisted还实现了reactor设计模式以及基于回调函数风格的非阻塞异步IO.
+twisted还实现了reactor设计模式以及基于回调函数风格的非阻塞异步IO,所以网络性能很好.(也是epoll那一套?)
 
 
 ```
