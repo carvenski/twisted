@@ -61,7 +61,7 @@ reactor.run()
 
 ```
 
-#### Chatroom example
+#### ChatRoomServer example
 ```python
 from twisted.internet import reactor, protocol, endpoints
 from twisted.protocols import basic
