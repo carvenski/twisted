@@ -2,6 +2,8 @@
 
 [twisted官网](https://twistedmatrix.com/trac/)
 
+[twisted原理介绍](https://www.cnblogs.com/xianguang/p/7027661.html)
+
 #### twisted框架介绍
 ```
 Twisted is an event-driven networking engine written in Python2.
@@ -24,6 +26,8 @@ while True:
     events = select_wait_for_events(timeout)
     for event in events:
         event.process()
+
+twisted中还引入了defer的概念,其实就是tornado中的future的概念.
 
 ```
 
