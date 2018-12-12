@@ -27,7 +27,10 @@ while True:
     for event in events:
         event.process()
 
-twisted中还引入了defer的概念,其实就是tornado中的future的概念.
+twisted中的一些概念:
+defer  就是tornado中的future的概念.
+Transport  
+Protocol  
 
 ```
 
