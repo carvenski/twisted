@@ -20,17 +20,18 @@ twisted框架基于tcp/ip协议的socket通信,简单点说其实twisted就是�
  所以,twisted被称为网络通信程序的引擎!!
 **************************************
 
-twisted包含了reactor设计模式+select模型的回调函数风格的非阻塞异步IO.
-其实核心就是: 死循环 + select(监控read/write事件,然后触发回调函数)
+twisted核心思想中包含了reactor设计模式(ioloop) + select模型的回调函数风格的非阻塞异步IO.
+其实核心就是: 一个死循环(ioloop) + select监控read/write事件,然后触发回调函数.
+参考: https://github.com/yxzoro/py/blob/master/select/epoll_http_server.py
 while True:
     events = select_wait_for_events(timeout)
     for event in events:
         event.process()
 
 twisted中的一些概念:
-defer  就是tornado中的future的概念.
-Transport  
-Protocol  
+defer:  就是tornado中的future的概念,为了不让函数阻塞,先立马返回一个future对象,等结果好了时再回调处理一下结果.
+Transport:  
+Protocol:  
 
 ```
 
