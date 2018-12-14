@@ -35,7 +35,7 @@ Protocol:
 
 ```
 
-### 其实和直接使用server socket + client socket的方式来写网络程序类似
+### 其实就和直接使用 selectors + server/client socket 的方式来写网络通信程序类似
 
 #### EchoServer example
 ```python
