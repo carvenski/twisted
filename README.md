@@ -127,9 +127,10 @@ while True:
 # 使用twisted的Protocol + Transport + Reactor to realize a HTTP server.
 from twisted.internet import protocol, reactor, endpoints
 
-class Echo(protocol.Protocol):  # 实现个自定义协议就叫Echo协议: 协议规定发送什么就返回什么.
-    def dataReceived(self, data):  # 实现server socket接收到数据后应该做什么
+class HTTP(protocol.Protocol):  # 实现个自定义协议就叫HTTP协议: 协议规定请求和返回数据的格式: 第一行+header(kv)+空行+body.
+    def dataReceived(self, data):  # 实现Http server socket接收到数据后应该怎么处理的逻辑
         print("=> req data:\n%s\n\n" % data)
+        # HTTP返回的数据格式:
         response = b"""HTTP/1.0 200 OK
 Date: fuck
 Server: fuck
@@ -143,31 +144,32 @@ Connection: Closed
         self.transport.write(response)  # 这里可以看到其实transport就是socket的封装,使用transport来读写数据.
         self.transport.loseConnection() # 这不就是socket.close()么...
 
-class EchoFactory(protocol.Factory): # Factory工厂模式,就返回个协议实例
+class HTTPFactory(protocol.Factory): # Factory工厂模式,就返回个协议实例
     def buildProtocol(self, addr):
-        return Echo()
+        return HTTP()
 
-endpoints.serverFromString(reactor, "tcp:80").listen(EchoFactory())
-print("server started at :80")
+endpoints.serverFromString(reactor, "tcp:80").listen(HTTPFactory())
+print("HTTP server started at :80")
 reactor.run()
 
 ```
 
 
 #### EchoServer example
-*可以认为这是个最简单的自定义协议: echoserver协议,该协议规定的数据格式就是:发送什么就返回什么.*
+*可以认为这是个最简单的自定义协议: echo协议,该协议规定的数据格式就是:发送什么就返回什么.*
 ```python
 from twisted.internet import protocol, reactor, endpoints
 
-class Echo(protocol.Protocol):
-    def dataReceived(self, data):
-        self.transport.write(data)
+class Echo(protocol.Protocol): # 实现个自定义协议就叫Echo协议: 协议规定发送什么就返回什么.
+    def dataReceived(self, data):  # 实现server socket接收到数据后应该做什么
+        self.transport.write(data)  # 这里可以看到其实transport就是socket的封装,使用transport来读写数据.
 
 class EchoFactory(protocol.Factory):
     def buildProtocol(self, addr):
         return Echo()
 
 endpoints.serverFromString(reactor, "tcp:1234").listen(EchoFactory())
+print("Echo server started at :1234")
 reactor.run()
 ```
 
