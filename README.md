@@ -119,6 +119,10 @@ while True:
         # 所以在每一个请求里面的网络访问之类的操作,也要将其对应的底层socket也register到loop中去就行了.
         callback(key.fileobj, mask)
 
+  ||
+  ||
+  \/
+
 # twisted版本 epoll_http_server.py 
 # 使用twisted的Protocol + Transport + Reactor to realize a HTTP server.
 from twisted.internet import protocol, reactor, endpoints
