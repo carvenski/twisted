@@ -130,6 +130,7 @@ while True:
 # 使用twisted的Protocol + Transport + Reactor to realize a HTTP server.
 from twisted.internet import protocol, reactor, endpoints
 
+# 协议的实现类.其实这就是client socket.
 class HTTP(protocol.Protocol):  #实现个自定义协议就叫HTTP协议,协议规定请求和返回数据的格式:第一行+header(kv)+空行+body.
     def dataReceived(self, data):  #实现Http server socket接收到数据后应该怎么处理的逻辑
         print("=> req data:\n%s\n\n" % data)
@@ -147,7 +148,8 @@ Connection: Closed
         self.transport.write(response)  # 这里可以看到其实transport就是socket的封装,使用transport来读写数据.
         self.transport.loseConnection() # 这不就是socket.close()么...
 
-class HTTPFactory(protocol.Factory): # Factory工厂模式,就返回个协议实例
+# Factory工厂模式,就返回个协议实例.其实这个就是server socket,负责建立连接并返回client socket的.
+class HTTPFactory(protocol.Factory): 
     def buildProtocol(self, addr):
         return HTTP()
 
