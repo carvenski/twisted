@@ -203,7 +203,7 @@ reactor.run()
 from twisted.internet import reactor, protocol, endpoints
 from twisted.protocols import basic
 
-class PubProtocol(basic.LineReceiver):
+class ChatRoomProtocol(basic.LineReceiver): # 实现个自定义ChatRoom协议的server/cient.
     def __init__(self, factory):
         self.factory = factory
 
@@ -219,14 +219,14 @@ class PubProtocol(basic.LineReceiver):
             source = u"<{}> ".format(self.transport.getHost()).encode("ascii")
             c.sendLine(source + line)
 
-class PubFactory(protocol.Factory):
+class ChatRoomFactory(protocol.Factory):
     def __init__(self):
         self.clients = set()
 
     def buildProtocol(self, addr):
-        return PubProtocol(self)
+        return ChatRoomProtocol(self)  # 在每个conn里获取当前factory维护的全局变量.
 
-endpoints.serverFromString(reactor, "tcp:1025").listen(PubFactory())
+endpoints.serverFromString(reactor, "tcp:1025").listen(ChatRoomFactory())
 reactor.run()
 ```
 
