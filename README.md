@@ -6,8 +6,10 @@
 
 #### twisted框架介绍
 ```python
-Twisted is an event-driven networking engine written in Python2.
+Twisted is an event-driven networking engine written in Python.
 twisted框架基于tcp/ip协议的socket通信,简单点说其实twisted就是把socket的api又封装成更简洁易用的api了.
+框架就是这样,本质就是一层层的api封装.最后又提供给你它自己的一套开箱即用的api...
+twisted就是封装了selector+socket,并且针对各种协议(http/rpc/ssh等)提供了一套该协议易用的api和其server/client的实现.
 然后你可以不直接使用底层socket来实现网络通信程序,而使用twisted框架提供的api来写各种基于tcp/ip协议和socket编程的网络程序.
 典型的如:
   基于http协议的http client/server
