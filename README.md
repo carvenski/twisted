@@ -5,7 +5,7 @@
 [twisted原理介绍](https://www.cnblogs.com/xianguang/p/7027661.html)
 
 #### twisted框架介绍
-```
+```python
 Twisted is an event-driven networking engine written in Python2.
 twisted框架基于tcp/ip协议的socket通信,简单点说其实twisted就是把socket的api又封装成更简洁易用的api了.
 然后你可以不直接使用底层socket来实现网络通信程序,而使用twisted框架提供的api来写各种基于tcp/ip协议和socket编程的网络程序.
@@ -122,6 +122,7 @@ while True:
 
 
 #### EchoServer example
+*可以认为这是个最简单的自定义协议: echoserver协议,该协议规定的数据格式就是:发送什么就返回什么.*
 ```python
 from twisted.internet import protocol, reactor, endpoints
 
