@@ -28,11 +28,13 @@ while True:
     for event in events:
         event.process()
 
-twisted中的一些概念:
-defer:  就是tornado中的future的概念,为了不让函数阻塞,先立马返回一个future对象,等结果好了时再回调处理一下结果.
-Transport:  
-Protocol:  
-
+----------------------------------------------------------------------------------------------------------
+twisted中的几个重点概念:
+reactor:    就是select loop,一个包含select的死循环而已,循环监听注册的socket的read/write事件,然后触发回调.
+defer:      就是tornado中的future的概念,为了不让函数阻塞,先立马返回一个future对象,等结果好了时再回调处理一下结果.
+Transport:  其实就是socket的一层封装,基本上Transport的用法和socket的一样,无非connect/receive/send/close.
+Protocol:   代表一个协议,实现一个自定义协议时就继承它,然后实现该协议的数据格式处理逻辑.
+----------------------------------------------------------------------------------------------------------
 ```
 
 ### 其实就和直接使用 selector + server/client socket 的方式来写网络通信程序本质一样.
@@ -50,10 +52,8 @@ Protocol:
 #   并且因为有select/epoll异步回调模型,轻松实现单线程非阻塞效率高的网络程序.
 # ********************************************************************************************************
 
-epoll_http_server.py
-"""
-demo: selector + socket to realize a HTTP server.
-"""
+# 原生版本 epoll_http_server.py 
+# selector + socket to realize a HTTP server.
 import selectors
 import socket
 
@@ -117,6 +117,34 @@ while True:
         # 在每一个请求的handler里面都不能有阻塞操作,否则会导致这里的callback阻塞住整个loop.
         # 所以在每一个请求里面的网络访问之类的操作,也要将其对应的底层socket也register到loop中去就行了.
         callback(key.fileobj, mask)
+
+# twisted版本 epoll_http_server.py 
+# 使用twisted的Protocol + Transport + Reactor to realize a HTTP server.
+from twisted.internet import protocol, reactor, endpoints
+
+class Echo(protocol.Protocol):  # 实现个自定义协议就叫Echo协议: 协议规定发送什么就返回什么.
+    def dataReceived(self, data):  # 实现server socket接收到数据后应该做什么
+        print("=> req data:\n%s\n\n" % data)
+        response = b"""HTTP/1.0 200 OK
+Date: fuck
+Server: fuck
+Last-Modified: fuck
+Content-Length: 100
+Content-Type: text/plain
+Connection: Closed
+
+...hello...http...fuck..."""
+        print("=> send http response.")
+        self.transport.write(response)  # 这里可以看到其实transport就是socket的封装,使用transport来读写数据.
+        self.transport.loseConnection() # 这不就是socket.close()么...
+
+class EchoFactory(protocol.Factory): # Factory工厂模式,就返回个协议实例
+    def buildProtocol(self, addr):
+        return Echo()
+
+endpoints.serverFromString(reactor, "tcp:80").listen(EchoFactory())
+print("server started at :80")
+reactor.run()
 
 ```
 
