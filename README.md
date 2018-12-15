@@ -34,7 +34,8 @@ twisted中的几个重点概念:
 reactor:    就是select loop,一个包含select的死循环而已,循环监听注册的socket的read/write事件,然后触发回调.
 defer:      就是tornado中的future的概念,为了不让函数阻塞,先立马返回一个future对象,等结果好了时再回调处理一下结果.
 Transport:  其实就是socket的一层封装,基本上Transport的用法和socket的一样,无非connect/receive/send/close.
-Protocol:   代表一个协议,实现一个自定义协议时就继承它,然后实现该协议的数据格式处理逻辑.
+Protocol:   代表一个协议,实现一个自定义协议时就继承它,然后实现该协议的数据格式处理逻辑.其实它就是client socket.
+ProtocolFactory: 负责生成协议实例,其实它就是server socket,每个连接建好后由它生成protocol/client socket实例.
 ----------------------------------------------------------------------------------------------------------
 ```
 
