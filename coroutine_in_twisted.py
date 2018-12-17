@@ -43,16 +43,14 @@ def f4():
 # *********************************************************************************
 
 def run_until_complete(loop, coroutines=[]):
-    # start all coroutine generator:
-    for f in coroutines:
-        f()
-    # start ioloop
     try:
         loop.run()
     except Exception as e:
         print("ioloop stopped...of %s" % e.message)
 
-coroutines = [f1, f2, f3, f4]
+# start all coroutine generator:
+coroutines = [f1(), f2(), f3(), f4()]
+# start loop
 run_until_complete(ioloop, coroutines)
 
 # *********************************************************************************
