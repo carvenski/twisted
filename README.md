@@ -13,6 +13,8 @@ twisted就是封装了selector+socket,并且针对各种协议(http/rpc/ssh等)�
 然后你可以不直接使用底层socket来实现网络通信程序,而使用twisted框架提供的api来写各种基于tcp/ip协议和socket编程的网络程序.
 典型的如:
   基于http协议的http client/server
+  基于websocket协议的websocket client/server
+  基于socket5协议的socket5 client/server
   基于rpc协议的rpc client/server
   基于SMTP/POP3/IMAP4等邮件协议的mail client/server
   基于ssh协议的ssh client/server
