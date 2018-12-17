@@ -2,9 +2,9 @@
 
 [twisted官网](https://twistedmatrix.com/trac/)
 
-[twisted原理介绍](https://www.cnblogs.com/xianguang/p/7027661.html)
+[twisted原理](https://www.cnblogs.com/xianguang/p/7027661.html)
 
-#### twisted框架介绍
+#### twisted框架核心概念
 ```python
 Twisted is an event-driven networking engine written in Python.
 twisted框架基于tcp/ip协议的socket通信,简单点说其实twisted就是把socket的api又封装成更简洁易用的api了.
