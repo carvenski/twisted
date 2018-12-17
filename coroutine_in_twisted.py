@@ -43,6 +43,9 @@ def f4():
 # *********************************************************************************
 
 def run_until_complete(loop, coroutines):
+    # just a look
+    for co in coroutines:
+        print(co)
     try:
         loop.run()
     except Exception as e:
