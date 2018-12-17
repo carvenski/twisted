@@ -42,7 +42,7 @@ def f4():
 #   (defer even has a function called asFuture() to convert a derfer to a future.)
 # *********************************************************************************
 
-def run_until_complete(loop, coroutines=[]):
+def run_until_complete(loop, coroutines):
     try:
         loop.run()
     except Exception as e:
