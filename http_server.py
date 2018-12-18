@@ -1,6 +1,3 @@
-
-
-
 from twisted.internet import protocol, reactor, endpoints
 
 class HTTP(protocol.Protocol):
