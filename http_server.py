@@ -15,6 +15,8 @@ Connection: Closed
 %s """ % (len(content), content)
         print("=> send http response.")        
         self.transport.write(response)
+        # http协议是一次req+一次response,所以默认断开连接.后面再重新建立连接.
+        # 当然也可以传Connection: keep-alive的header来表明不断开socket连接,后面的交互再复用它.
         self.transport.loseConnection()  
 
 class HTTPFactory(protocol.Factory):
