@@ -75,8 +75,8 @@ Sec-WebSocket-Accept: %s
                 掩码的密钥是一个32位的随机值,客户端随机选取密钥,这个掩码处理后并不影响Payload数据的长度,
                 服务器收到掩码处理后的数据后,解码算法如下(这个算法对于加密和解密的操作都是一样的):                
                 第i个数据(pyload) 需要和 第 i%4 个掩码做 异或运算,即                
-                var data = new Bytes("我是demo")  //原始数据                
-                var mask = [0x24,0x48,0xad,0x54]  //四个字节的掩码
+                var data = new ByteArray("我是demo")  //数据字节数组                
+                var mask = [0x24, 0x48, 0xad, 0x54]  //四个字节的掩码字节数组
                 for(var i = 0; i < data.length; i++) {
                     data[i] = data[i] ^ mask[i % 4]
                 }  //data即可变成 加密或解密后的数据
