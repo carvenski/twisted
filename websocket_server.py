@@ -86,7 +86,8 @@ Sec-WebSocket-Accept: %s
                 如果值是127,则后面8个字节形成的64位无符号整型数的值是payload的真实长度
                 长度表示遵循一个原则,用最少的字节表示长度,尽量减少不必要的传输
             '''            
-            # convert data string to bytearray, not data_bytes = bytes(data) !!
+            # convert data string to bytearray, not data_bytes = bytes(data)...
+            # in python, bytearray != bytes == str
             data_bytes = bytearray(data)
             print(len(data_bytes))        
             print("=> got origin ws client sended data bytes: %s" % [int(i) for i in data_bytes])
