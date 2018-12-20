@@ -359,6 +359,7 @@ Sec-WebSocket-Accept: %s
             second_byte = bin(data_bytes[1])[2:]
             mask_key_bytes = data_bytes[2:6]
             payload_bytes = data_bytes[6:]
+            # decode payload by mask
             for i, _ in enumerate(payload_bytes):
                 payload_bytes[i] = payload_bytes[i] ^ mask_key_bytes[i % 4]
             ## 这里只考虑payload长度小于125的情况...
