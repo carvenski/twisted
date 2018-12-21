@@ -67,8 +67,9 @@ tornado就是利用python的yield语法可以挂起函数的特点封装出了�
 **********************************************************************************************************
 
 java中也有同样的东西就是: selector + socket -> NIO -> netty
-NIO是基于selector+socket封装的,netty又是基于NIO封装的,类似python的twisted的框架.
+NIO是基于selector+socket封装的,netty又是基于NIO封装的,netty框架类似python的twisted的框架.
 在java中使用netty框架开发各种协议的client/server.netty和twisted的定位一样.
+(https://github.com/netty/netty)
 ```
 
 ### 其实就和直接使用 selector + server/client socket 的方式来写网络通信程序本质一样.
