@@ -118,11 +118,12 @@ def read(conn, mask):
     # ---- make response ----
 
     # HTTP protocol which is based on tcp/ip protocol socket.
+    # Content-Length如果不匹配有些浏览器会报错.
     response = b"""HTTP/1.0 200 OK
 Date: fuck
 Server: fuck
 Last-Modified: fuck
-Content-Length: 100
+Content-Length: 25
 Content-Type: text/plain
 Connection: Closed
 
@@ -173,7 +174,7 @@ class HTTP(protocol.Protocol):  #实现个自定义协议就叫HTTP协议,协议
 Date: fuck
 Server: fuck
 Last-Modified: fuck
-Content-Length: 100
+Content-Length: 25
 Content-Type: text/plain
 Connection: Closed
 
