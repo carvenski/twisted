@@ -65,10 +65,10 @@ while True:
         callback(key.fileobj, mask)
 
 """
-socket异步原理
+非阻塞socket原理
 参考:https://blog.csdn.net/hguisu/article/details/7453390
 
-我们把一个SOCKET接口设置为非阻塞就是告诉内核(调用set_non_blocking)
+我们把一个SOCKET接口设置为非阻塞(调用set_non_blocking)就是告诉内核
 当所请求的I/O操作无法完成时，不要将进程睡眠，而是返回一个错误
 这样我们的I/O操作函数将不断的测试数据是否已经准备好，如果没有准备好，继续测试，直到数据准备好为止
                                                                                                                                       
@@ -81,6 +81,8 @@ socket异步原理
 从以上可知: 其实selector/epoll这些东西本质上做的事也就是: 轮训socket而已,你的数据好没好啊? 
 从selector的api可以看出:把一组socket传给它,然后它自己阻塞(内部在轮训),哪个好了就通知你,调用回调函数
 *******************************************************************************************
+
+默认情况下，socket的connect/accept/recv/send都是阻塞读写的，需要设置为非阻塞模式(set_non_blocking)
 """  
 
 
